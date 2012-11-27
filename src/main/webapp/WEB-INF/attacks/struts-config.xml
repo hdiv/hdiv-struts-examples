@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="sqlStringInjectionForm"
+			type="org.apache.struts.webapp.examples.attacks.SQLInjection.SimpleSQLStringInjectionActionForm" />
+		<form-bean name="sqlNumericInjectionForm"
+			type="org.apache.struts.webapp.examples.attacks.SQLInjection.SimpleSQLNumericInjectionActionForm" />
+		<form-bean name="listOrdersForm"
+			type="org.apache.struts.webapp.examples.attacks.parameterTampering.ListOrdersForm" />
+		<form-bean name="xssForm"
+			type="org.apache.struts.webapp.examples.attacks.xss.XSSActionForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/unsecure/attacks" forward="/attacks.jsp" />
+
+		<!-- SQL Injection ======================================== -->
+		<action path="/unsecure/prepareSQLInjection" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/SQLInjection/SQLStringInjection.jsp" />
+		</action>
+
+		<action path="/unsecure/processSQLStringInjection"
+			type="org.apache.struts.webapp.examples.attacks.SQLInjection.ProcessSQLStringInjectionAction"
+			name="sqlStringInjectionForm">
+			<forward name="success" path="/SQLInjection/ListStringInjection.jsp" />
+		</action>
+
+		<!-- Parameter Tampering ======================================== -->
+		<action path="/unsecure/prepareHiddenFieldTampering" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/parameterTampering/HiddenFieldTampering.jsp" />
+		</action>
+
+		<action path="/unsecure/processListOrders"
+			type="org.apache.struts.webapp.examples.attacks.parameterTampering.ListOrdersAction"
+			name="listOrdersForm" scope="request" validate="false">
+			<forward name="success" path="/parameterTampering/ListOrders.jsp" />
+		</action>
+
+		<!-- Cross Site Scripting ======================================== -->
+		<action path="/unsecure/prepareXSS" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/xss/xss.jsp" />
+		</action>
+
+		<action path="/unsecure/processXSS" type="org.apache.struts.webapp.exercise.SuccessAction"
+			name="xssForm" scope="request" validate="false">
+			<forward name="success" path="/xss/xssResults.jsp" />
+		</action>
+
+		<!-- Vulnerable Section resolved by HDIV ======================================== -->
+		<action path="/secure/attacks" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/hdiv/attacks.jsp" />
+		</action>
+
+		<!-- SQL Injection ======================================== -->
+		<action path="/secure/prepareSQLInjection" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/hdiv/SQLInjection/SQLStringInjection.jsp" />
+		</action>
+
+		<action path="/secure/processSQLStringInjection"
+			type="org.apache.struts.webapp.examples.attacks.SQLInjection.ProcessSQLStringInjectionAction"
+			name="sqlStringInjectionForm" input="/hdiv/SQLInjection/SQLStringInjection.jsp"
+			validate="true">
+			<forward name="success" path="/hdiv/SQLInjection/ListStringInjection.jsp" />
+		</action>
+
+		<!-- Parameter Tampering ======================================== -->
+		<action path="/secure/prepareHiddenFieldTampering" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success"
+				path="/hdiv/parameterTampering/HiddenFieldTampering.jsp" />
+		</action>
+
+		<action path="/secure/processListOrders"
+			type="org.apache.struts.webapp.examples.attacks.parameterTampering.ListOrdersAction"
+			name="listOrdersForm" scope="request" validate="false">
+			<forward name="success" path="/hdiv/parameterTampering/ListOrders.jsp" />
+		</action>
+
+		<!-- Cross Site Scripting ======================================== -->
+		<action path="/secure/prepareXSS" type="org.apache.struts.webapp.exercise.SuccessAction">
+			<forward name="success" path="/hdiv/xss/xss.jsp" />
+		</action>
+
+		<action path="/secure/processXSS" type="org.apache.struts.webapp.exercise.SuccessAction"
+			name="xssForm" scope="request" input="/hdiv/xss/xss.jsp" validate="true">
+			<forward name="success" path="/hdiv/xss/xssResults.jsp" />
+		</action>
+	</action-mappings>
+
+	<!-- ========== Controller Configuration =============================== -->
+	<controller processorClass="org.hdiv.action.HDIVRequestProcessor" />
+
+	<message-resources parameter="org.apache.struts.webapp.examples.MessageResource" />
+
+</struts-config>

@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+<form-validation>
+  <global>
+    <constant>
+      <constant-name>phone</constant-name>
+      <constant-value>^\(?(\d{3})\)?[-| ]?(\d{3})[-| ]?(\d{4})$</constant-value>
+    </constant>
+    <constant>
+      <constant-name>zip</constant-name>
+      <constant-value>^\d{5}\d*$</constant-value>
+    </constant>
+  </global>
+
+  <!-- ========================= Default Formset ========================= -->
+  <formset>
+    <constant>
+      <constant-name>zip</constant-name>
+      <constant-value>^\d{5}(-\d{4})?$</constant-value>
+    </constant>
+    <form name="registrationForm">
+      <field property="firstName" depends="required,mask,minlength">
+        <arg key="registrationForm.firstname.displayname" position="0"/>
+        <arg name="minlength" key="${var:minlength}" resource="false" position="1"/>
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>5</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask,maxlength">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" position="0" />
+        <arg name="maxlength" key="${var:maxlength}" resource="false" position="1"/>
+         <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>10</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" depends="required,mask">
+        <arg key="registrationForm.stateprov.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" depends="mask">
+        <arg key="registrationForm.phone.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${phone}</var-value>
+        </var>
+      </field>
+      <field property="email" depends="required,email">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="multiRegistrationForm">
+      <field property="firstName" depends="required,mask" page="1">
+        <arg key="registrationForm.firstname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask" page="1">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required" page="1">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask" page="1">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" depends="required,mask" page="2">
+        <arg key="registrationForm.stateprov.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask" page="2">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" depends="mask" page="2">
+        <arg key="registrationForm.phone.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${phone}</var-value>
+        </var>
+      </field>
+      <field property="email" depends="required,email" page="2">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="typeForm">
+      <field property="byte" depends="required,byte">
+        <arg key="typeForm.byte.displayname" />
+      </field>
+      <field property="short" depends="required,short">
+        <arg key="typeForm.short.displayname" />
+      </field>
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>10</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>20</var-value>
+        </var>
+      </field>
+      <field property="long" depends="required,long">
+        <arg key="typeForm.long.displayname" />
+      </field>
+      <field property="float" depends="required,float">
+        <arg key="typeForm.float.displayname" />
+      </field>
+      <field property="floatRange" depends="required,float,floatRange">
+        <arg key="typeForm.floatRange.displayname" />
+        <arg name="floatRange" key="${var:min}" resource="false" position="1" />
+        <arg name="floatRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>-2.17</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>3.14</var-value>
+        </var>
+      </field>
+      <field property="double" depends="required,double">
+        <arg key="typeForm.double.displayname" />
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>MM/dd/yyyy</var-value>
+        </var>
+      </field>
+      <field property="creditCard" depends="required,creditCard">
+        <arg key="typeForm.creditCard.displayname" />
+      </field>
+      <field property="email" depends="required,email">
+        <arg key="typeForm.email.displayname" />
+      </field>
+      <field property="url" depends="required,url">
+        <arg key="typeForm.url.displayname" />
+      </field>
+      <field property="mask" depends="required,mask">
+        <arg key="typeForm.mask.displayname" />
+        <msg name="mask" key="typeForm.mask.error" /> 
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[A-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="value" indexedListProperty="nameList" depends="required">
+        <arg key="typeForm.nested.name.displayname" />
+      </field>
+    </form>
+    <form name="jsTypeForm">
+      <field property="name" depends="required,byte">
+        <arg key="typeForm.name.displayname" />
+      </field>
+      <field property="byte" depends="required,byte">
+        <arg key="typeForm.byte.displayname" />
+      </field>
+      <field property="short" depends="required,short">
+        <arg key="typeForm.short.displayname" />
+      </field>
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>10</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>20</var-value>
+        </var>
+      </field>
+      <field property="float" depends="required,float">
+        <arg key="typeForm.float.displayname" />
+      </field>
+      <field property="floatRange" depends="required,float,floatRange">
+        <arg key="typeForm.floatRange.displayname" />
+        <arg name="floatRange" key="${var:min}" resource="false" position="1" />
+        <arg name="floatRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>-2.17</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>3.14</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>MM/dd/yyyy</var-value>
+        </var>
+      </field>
+      <field property="creditCard" depends="required,creditCard">
+        <arg key="typeForm.creditCard.displayname" />
+      </field>
+      <field property="satisfaction" depends="required">
+        <arg key="typeForm.option.satisfaction" />
+      </field>
+      <field property="osList" depends="required">
+        <arg key="typeForm.option.os.list" />
+      </field>
+      <field property="overallSatisfaction" depends="required">
+        <arg key="typeForm.radio.overall.satisfaction" />
+      </field>
+      <field property="wouldRecommend" depends="required">
+        <arg key="typeForm.checkbox.wouldrecommend" />
+      </field>
+      <field property="usedLanguages" depends="required">
+        <arg key="typeForm.checkbox.used.languages" />
+      </field>
+    </form>
+ 
+    <!-- *********** Bundles Examples Form *********** -->
+    <form name="bundlesForm">
+      <field property="name" depends="required">
+        <msg name="required" key="You have forgotten to enter the name." resource="false" />
+      </field>
+      <field property="address" depends="required">
+        <arg key="bundlesForm.error.address" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="phone" depends="required">
+        <arg key="bundlesForm.error.phone"         bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="dob" depends="required">
+        <arg key="bundlesForm.error.dob"           bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+      </field>
+      <field property="age" depends="required,integer,intRange">
+        <arg key="bundlesForm.error.age" bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+        <msg name="integer" key="bundlesForm.errors.integer" bundle="other"/>
+        <msg name="intRange" key="Age must be betweem 18 and 65 years." resource="false" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>18</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>65</var-value>
+        </var>
+      </field>
+    </form>
+ 
+    <!-- *********** validwhen Examples Form *********** -->
+    <form name="validWhenForm">
+
+      <!-- validwhen: simple validation -->
+      <field property="lastName" depends="validwhen">
+        <arg key="validWhenForm.lastName" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>((firstName == null) or (*this* != null))</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: both fields validation -->
+      <field property="fieldA" depends="validwhen">
+        <msg name="validwhen" key="validWhenForm.error.both" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( ((fieldB == null) and (*this* == null)) or ((fieldB != null) and (*this* != null)) )</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: numeric compare validation -->
+      <field property="max" depends="required,integer,validwhen">
+        <arg key="validWhenForm.max" />
+        <msg name="validwhen" key="validWhenForm.error.numeric" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>(*this* &gt; min)</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: address validation -->
+      <field property="address1" depends="validwhen">
+        <arg key="validWhenForm.address1" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address2 == null) and
+                     ( (city == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="city" depends="validwhen">
+        <arg key="validWhenForm.city" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="zip" depends="validwhen">
+        <arg key="validWhenForm.zip" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (city == null) )))</var-value>
+        </var>
+      </field>
+    </form>
+
+  <!-- ========================= fr Formset ========================= -->
+  </formset>
+  <formset language="fr">
+    <form name="registrationForm">
+      <field property="lastName" depends="required,mask">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv">
+        <arg  key="registrationForm.stateprov.displayname" />
+      </field>
+      <field property="phone">
+        <arg key="registrationForm.phone.displayname" />
+      </field>
+    </form>
+    <form name="multiRegistrationForm">
+      <field property="firstName" depends="required,mask" page="1">
+        <arg key="registrationForm.firstname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask" page="1">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required" page="1">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask" page="1">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" page="2">
+        <arg key="registrationForm.stateprov.displayname" />
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask" page="2">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" page="2">
+        <arg key="registrationForm.phone.displayname" />
+      </field>
+      <field property="email" depends="required,email" page="2">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="typeForm">
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>50</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>60</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>dd.MM.yyyy</var-value>
+        </var>
+      </field>
+    </form>
+    <form name="jsTypeForm">
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>100</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>200</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>dd.MM.yyyy</var-value>
+        </var>
+      </field>
+    </form>
+ 
+    <!-- *********** Bundles Examples Form *********** -->
+    <form name="bundlesForm">
+      <field property="name" depends="required">
+        <msg name="required" key="You have forgotten to enter the name." resource="false" />
+      </field>
+      <field property="address" depends="required">
+        <arg key="bundlesForm.error.address" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="phone" depends="required">
+        <arg key="bundlesForm.error.phone"         bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="dob" depends="required">
+        <arg key="bundlesForm.error.dob"           bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+      </field>
+      <field property="age" depends="required,integer,intRange">
+        <arg key="bundlesForm.error.age" bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+        <msg name="integer" key="bundlesForm.errors.integer" bundle="other"/>
+        <msg name="intRange" key="Age must be betweem 18 and 65 years." resource="false" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>18</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>65</var-value>
+        </var>
+      </field>
+    </form>
+
+    <!-- *********** validwhen Examples Form *********** -->
+    <form name="validWhenForm">
+
+      <!-- validwhen: simple validation -->
+      <field property="lastName" depends="validwhen">
+        <arg key="validWhenForm.lastName" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>((firstName == null) or (*this* != null))</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: both fields validation -->
+      <field property="fieldA" depends="validwhen">
+        <msg name="validwhen" key="validWhenForm.error.both" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( ((fieldB == null) and (*this* == null)) or ((fieldB != null) and (*this* != null)) )</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: numeric compare validation -->
+      <field property="max" depends="required,integer,validwhen">
+        <arg key="validWhenForm.max" />
+        <msg name="validwhen" key="validWhenForm.error.numeric" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>(*this* &gt; min)</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: address validation -->
+      <field property="address1" depends="validwhen">
+        <arg key="validWhenForm.address1" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address2 == null) and
+                     ( (city == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="city" depends="validwhen">
+        <arg key="validWhenForm.city" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="zip" depends="validwhen">
+        <arg key="validWhenForm.zip" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (city == null) )))</var-value>
+        </var>
+      </field>
+    </form>
+
+  </formset>
+
+  <!-- ========================= ja Formset ========================= -->
+  <formset language="ja">
+    <constant>
+      <constant-name>zip</constant-name>
+      <constant-value>^\d{3}-\d{4}$</constant-value>
+    </constant>
+    <constant>
+      <constant-name>phone</constant-name>
+      <constant-value>^[0][1-9]((\d{2,3}-?)|(-\d{2,3})|(\d-\d{1,2})|(\d{2}-\d))\d-\d{4}$</constant-value>
+    </constant>
+    <form name="registrationForm">
+      <field property="firstName" depends="required,mask,minlength">
+        <arg key="registrationForm.firstname.displayname" />
+        <arg name="minlength" key="${var:minlength}" resource="false" position="1" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>5</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask,maxlength">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <arg name="maxlength" key="${var:maxlength}" resource="false" position="1" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>10</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" depends="required,mask">
+        <arg key="registrationForm.stateprov.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" depends="mask">
+        <arg key="registrationForm.phone.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${phone}</var-value>
+        </var>
+      </field>
+      <field property="email" depends="required,email">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="multiRegistrationForm">
+      <field property="firstName" depends="required,mask" page="1">
+        <arg key="registrationForm.firstname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask" page="1">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required" page="1">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask" page="1">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" depends="required,mask" page="2">
+        <arg key="registrationForm.stateprov.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask" page="2">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" depends="mask" page="2">
+        <arg key="registrationForm.phone.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${phone}</var-value>
+        </var>
+      </field>
+      <field property="email" depends="required,email" page="2">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="typeForm">
+      <field property="name" depends="required,byte">
+        <arg key="typeForm.name.displayname" />
+      </field>
+      <field property="byte" depends="required,byte">
+        <arg key="typeForm.byte.displayname" />
+      </field>
+      <field property="short" depends="required,short">
+        <arg key="typeForm.short.displayname" />
+      </field>
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>400</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>700</var-value>
+        </var>
+      </field>
+      <field property="long" depends="required,long">
+        <arg key="typeForm.long.displayname" />
+      </field>
+      <field property="float" depends="required,float">
+        <arg key="typeForm.float.displayname" />
+      </field>
+      <field property="floatRange" depends="required,float,floatRange">
+        <arg key="typeForm.floatRange.displayname" />
+        <arg name="floatRange" key="${var:min}" resource="false" position="1" />
+        <arg name="floatRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>-2.17</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>3.14</var-value>
+        </var>
+      </field>
+      <field property="double" depends="required,double">
+        <arg key="typeForm.double.displayname" />
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>yyyy/MM/dd</var-value>
+        </var>
+      </field>
+      <field property="creditCard" depends="required,creditCard">
+        <arg key="typeForm.creditCard.displayname" />
+      </field>
+      <field property="value" indexedListProperty="nameList" depends="required">
+        <arg key="typeForm.nested.name.displayname" />
+      </field>
+    </form>
+    <form name="jsTypeForm">
+      <field property="name" depends="required,byte">
+        <arg key="typeForm.name.displayname" />
+      </field>
+      <field property="byte" depends="required,byte">
+        <arg key="typeForm.byte.displayname" />
+      </field>
+      <field property="short" depends="required,short">
+        <arg key="typeForm.short.displayname" />
+      </field>
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>400</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>700</var-value>
+        </var>
+      </field>
+      <field property="float" depends="required,float">
+        <arg key="typeForm.float.displayname" />
+      </field>
+      <field property="floatRange" depends="required,float,floatRange">
+        <arg key="typeForm.floatRange.displayname" />
+        <arg name="floatRange" key="${var:min}" resource="false" position="1" />
+        <arg name="floatRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>-2.17</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>3.14</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>yyyy/MM/dd</var-value>
+        </var>
+      </field>
+      <field property="creditCard" depends="required,creditCard">
+        <arg key="typeForm.creditCard.displayname" />
+      </field>
+    </form>
+
+    <!-- *********** Bundles Examples Form *********** -->
+    <form name="bundlesForm">
+      <field property="name" depends="required">
+        <msg name="required" key="You have forgotten to enter the name." resource="false" />
+      </field>
+      <field property="address" depends="required">
+        <arg key="bundlesForm.error.address" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="phone" depends="required">
+        <arg key="bundlesForm.error.phone"         bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="dob" depends="required">
+        <arg key="bundlesForm.error.dob"           bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+      </field>
+      <field property="age" depends="required,integer,intRange">
+        <arg key="bundlesForm.error.age" bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+        <msg name="integer" key="bundlesForm.errors.integer" bundle="other"/>
+        <msg name="intRange" key="Age must be betweem 18 and 65 years." resource="false" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>18</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>65</var-value>
+        </var>
+      </field>
+    </form>
+
+    <!-- *********** validwhen Examples Form *********** -->
+    <form name="validWhenForm">
+
+      <!-- validwhen: simple validation -->
+      <field property="lastName" depends="validwhen">
+        <arg key="validWhenForm.lastName" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>((firstName == null) or (*this* != null))</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: both fields validation -->
+      <field property="fieldA" depends="validwhen">
+        <msg name="validwhen" key="validWhenForm.error.both" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( ((fieldB == null) and (*this* == null)) or ((fieldB != null) and (*this* != null)) )</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: numeric compare validation -->
+      <field property="max" depends="required,integer,validwhen">
+        <arg key="validWhenForm.max" />
+        <msg name="validwhen" key="validWhenForm.error.numeric" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>(*this* &gt; min)</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: address validation -->
+      <field property="address1" depends="validwhen">
+        <arg key="validWhenForm.address1" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address2 == null) and
+                     ( (city == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="city" depends="validwhen">
+        <arg key="validWhenForm.city" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="zip" depends="validwhen">
+        <arg key="validWhenForm.zip" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (city == null) )))</var-value>
+        </var>
+      </field>
+    </form>
+  </formset>
+
+  <!-- ========================= fr-CA Formset ========================= -->
+  <formset language="fr" country="CA">
+    <form name="registrationForm">
+      <field property="lastName" depends="required,mask">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv">
+        <arg key="registrationForm.stateprov.displayname" />
+      </field>
+      <field property="phone">
+        <arg key="registrationForm.phone.displayname" />
+      </field>
+    </form>
+    <form name="multiRegistrationForm">
+      <field property="firstName" depends="required,mask" page="1">
+        <arg key="registrationForm.firstname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="lastName" depends="required,mask" page="1">
+        <msg name="mask" key="registrationForm.lastname.maskmsg" />
+        <arg key="registrationForm.lastname.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^\w+$</var-value>
+        </var>
+      </field>
+      <field property="addr" depends="required" page="1">
+        <arg key="registrationForm.addr.displayname" />
+      </field>
+      <field property="cityStateZip.city" depends="required,mask" page="1">
+        <arg key="registrationForm.city.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>^[a-zA-Z]*$</var-value>
+        </var>
+      </field>
+      <field property="cityStateZip.stateProv" page="2">
+        <arg key="registrationForm.stateprov.displayname" />
+      </field>
+      <field property="cityStateZip.zipPostal[1]" depends="required,mask" page="2">
+        <arg key="registrationForm.zippostal.displayname" />
+        <var>
+          <var-name>mask</var-name>
+          <var-value>${zip}</var-value>
+        </var>
+      </field>
+      <field property="phone" page="2">
+        <arg key="registrationForm.phone.displayname" />
+      </field>
+      <field property="email" depends="required,email" page="2">
+        <arg key="registrationForm.email.displayname" />
+      </field>
+    </form>
+    <form name="typeForm">
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>50</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>60</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>dd.MM.yyyy</var-value>
+        </var>
+      </field>
+    </form>
+    <form name="jsTypeForm">
+      <field property="integer" depends="required,integer,intRange">
+        <arg key="typeForm.integer.displayname" />
+        <arg name="intRange" key="${var:min}" resource="false" position="1" />
+        <arg name="intRange" key="${var:max}" resource="false" position="2" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>100</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>200</var-value>
+        </var>
+      </field>
+      <field property="date" depends="required,date">
+        <arg key="typeForm.date.displayname" />
+        <var>
+          <var-name>datePatternStrict</var-name>
+          <var-value>MM-dd-yyyy</var-value>
+        </var>
+      </field>
+    </form>
+ 
+    <!-- *********** Bundles Examples Form *********** -->
+    <form name="bundlesForm">
+      <field property="name" depends="required">
+        <msg name="required" key="You have forgotten to enter the name." resource="false" />
+      </field>
+      <field property="address" depends="required">
+        <arg key="bundlesForm.error.address" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="phone" depends="required">
+        <arg key="bundlesForm.error.phone"         bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" bundle="other" />
+      </field>
+      <field property="dob" depends="required">
+        <arg key="bundlesForm.error.dob"           bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+      </field>
+      <field property="age" depends="required,integer,intRange">
+        <arg key="bundlesForm.error.age" bundle="different" />
+        <msg name="required" key="bundlesForm.errors.required" />
+        <msg name="integer" key="bundlesForm.errors.integer" bundle="other"/>
+        <msg name="intRange" key="Age must be betweem 18 and 65 years." resource="false" />
+        <var>
+          <var-name>min</var-name>
+          <var-value>18</var-value>
+        </var>
+        <var>
+          <var-name>max</var-name>
+          <var-value>65</var-value>
+        </var>
+      </field>
+    </form>
+ 
+    <!-- *********** validwhen Examples Form *********** -->
+    <form name="validWhenForm">
+
+      <!-- validwhen: simple validation -->
+      <field property="lastName" depends="validwhen">
+        <arg key="validWhenForm.lastName" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>((firstName == null) or (*this* != null))</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: both fields validation -->
+      <field property="fieldA" depends="validwhen">
+        <msg name="validwhen" key="validWhenForm.error.both" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( ((fieldB == null) and (*this* == null)) or ((fieldB != null) and (*this* != null)) )</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: numeric compare validation -->
+      <field property="max" depends="required,integer,validwhen">
+        <arg key="validWhenForm.max" />
+        <msg name="validwhen" key="validWhenForm.error.numeric" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>(*this* &gt; min)</var-value>
+        </var>
+      </field>
+
+      <!-- validwhen: address validation -->
+      <field property="address1" depends="validwhen">
+        <arg key="validWhenForm.address1" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address2 == null) and
+                     ( (city == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="city" depends="validwhen">
+        <arg key="validWhenForm.city" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (zip == null) )))</var-value>
+        </var>
+      </field>
+      <field property="zip" depends="validwhen">
+        <arg key="validWhenForm.zip" />
+        <var>
+          <var-name>test</var-name>
+          <var-value>( (*this* != null) or 
+                     ( (address1 == null) and
+                     ( (address2 == null) and
+                       (city == null) )))</var-value>
+        </var>
+      </field>
+    </form>
+
+  </formset>
+</form-validation>

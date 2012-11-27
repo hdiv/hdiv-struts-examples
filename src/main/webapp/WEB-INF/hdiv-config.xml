@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hdiv="http://www.hdiv.org/schema/hdiv"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
+
+	<hdiv:config errorPage="/error.jsp" excludedExtensions="css,png"
+		protectedExtensions=".*.do">
+		<hdiv:startPages>/welcome.do</hdiv:startPages>
+		<hdiv:startPages>/attacks/unsecure/.*</hdiv:startPages>
+		
+		<!-- test -->
+		<hdiv:startPages>/test/.*</hdiv:startPages>
+		<hdiv:startPages>/testFormTag.do</hdiv:startPages>
+		<hdiv:startPages>/simpleAction.do</hdiv:startPages>
+		<hdiv:startPages>/some/page.do</hdiv:startPages>
+		<hdiv:startPages>/path/to/non/existing/jsp.jsp</hdiv:startPages>
+		
+		<hdiv:startParameters>org.apache.struts.action.TOKEN,org.apache.struts.taglib.html.TOKEN</hdiv:startParameters>
+	</hdiv:config>
+
+	<!-- Finally, it's necessary to define editable data validation list for the application -->
+	<hdiv:editableValidations>
+		<hdiv:validationRule url="/attacks/secure/.*"/>
+	</hdiv:editableValidations>
+
+</beans>

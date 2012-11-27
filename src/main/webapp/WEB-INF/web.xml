@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>Struts Examples Application</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/hdiv-config.xml,/WEB-INF/vulnerable-config.xml</param-value>
+	</context-param>
+
+	<!-- Filters: HDIV Validator Filter -->
+	<filter>
+		<filter-name>ValidatorFilter</filter-name>
+		<filter-class>org.hdiv.filter.ValidatorFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ValidatorFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>ValidatorFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- Listeners: Spring and HDIV Listeners -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.hdiv.listener.InitListener</listener-class>
+	</listener>
+
+	<!-- Standard Action Servlet Configuration (with debugging) -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml,/WEB-INF/test/test-struts-config.xml,/WEB-INF/test/test-customtags-config.xml,/WEB-INF/test/test-el-config.xml</param-value>
+		</init-param>
+		<!-- module configurations -->
+		<init-param>
+			<param-name>config/exercise</param-name>
+			<param-value>/WEB-INF/exercise/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/upload</param-name>
+			<param-value>/WEB-INF/upload/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/validator</param-name>
+			<param-value>/WEB-INF/validator/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/dispatch</param-name>
+			<param-value>/WEB-INF/dispatch/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config/attacks</param-name>
+			<param-value>/WEB-INF/attacks/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<!-- Standard Action Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ServletTestRunner</servlet-name>
+		<servlet-class>org.apache.cactus.server.runner.ServletTestRunner</servlet-class>
+	</servlet>
+	
+	<servlet>
+        <servlet-name>JspRedirector</servlet-name>
+        <jsp-file>/test/jspRedirector.jsp</jsp-file>
+        <init-param>
+          <param-name>param1</param-name>
+          <param-value>value1 used for testing</param-value>
+        </init-param>        
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>ServletTestRunner</servlet-name>
+	    <url-pattern>/ServletTestRunner</url-pattern>
+	</servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>JspRedirector</servlet-name>
+        <url-pattern>/JspRedirector</url-pattern>
+    </servlet-mapping>
+
+	<!-- The Usual Welcome File List -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>upload.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Struts Tag Library Descriptors -->
+	<taglib>
+		<taglib-uri>/tags/struts-bean</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/tags/struts-html</taglib-uri>
+		<taglib-location>/WEB-INF/tld/hdiv-html.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/tags/struts-logic</taglib-uri>
+		<taglib-location>/WEB-INF/tld/hdiv-logic.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/tags/struts-nested</taglib-uri>
+		<taglib-location>/WEB-INF/tld/hdiv-nested.tld</taglib-location>
+	</taglib>
+</web-app>

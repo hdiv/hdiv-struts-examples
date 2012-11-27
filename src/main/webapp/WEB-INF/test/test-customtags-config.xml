@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<!--
+	This is a test Struts configuration file
+-->
+
+
+<struts-config>
+
+	<!-- ========== Form Bean Definitions =================================== -->
+	<form-beans>
+		<form-bean name="testDynaFormBean"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="field1" type="java.lang.String" />
+			<form-property name="field2" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Registration form bean -->
+		<form-bean name="testFormBean"
+			type="org.hdiv.taglib.SimpleBeanForTesting" />
+
+	</form-beans>
+
+
+	<!-- ========== Global Forward Definitions ============================== -->
+	<global-forwards>
+	
+		<forward name="simpleForward"
+			path="/path/to/non/existing/jsp.jsp" />
+
+		<forward name="testIncludeTagForward"
+			path="/test/org/hdiv/taglib/bean/resources/IncludeTagTest.jsp" />
+			
+	</global-forwards>
+
+
+	<!-- ========== Action Mapping Definitions ============================== -->
+	<action-mappings>
+
+		<action path="/testIncludeTagTransaction"
+			type="org.hdiv.taglib.bean.resources.IncludeTagTransactionTestAction">
+			<forward name="success"
+				path="/test/org/hdiv/taglib/bean/resources/IncludeTagTest.jsp" />
+		</action>
+
+		<action path="/simpleAction"
+			type="does.not.exist.SimpleAction">
+			<forward name="success" path="/does/not/exist/jsp.jsp" />
+		</action>
+
+		<action path="/testFormTag"
+			type="org.hdiv.actions.FormTagTestAction" name="testFormBean"
+			scope="request">
+			<forward name="success"
+				path="/test/org/hdiv/taglib/html/TestFormTag1.jsp" />
+		</action>
+
+	</action-mappings>
+
+	<!-- ========== Message Resources Definitions ============================== -->
+	<message-resources
+		parameter="org.hdiv.taglib.bean.resources.ApplicationResources" />
+
+	<message-resources key="alternate"
+		parameter="org.hdiv.taglib.bean.resources.AlternateApplicationResources" />
+
+
+</struts-config>

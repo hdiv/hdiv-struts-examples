@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="testbean" type="org.hdiv.exercise.TestBean" />		
+		<form-bean name="dynabean" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="foo" type="java.lang.String" />
+			<form-property name="bar" type="java.lang.String" />
+		</form-bean>
+	</form-beans>
+
+	<global-forwards>
+		<forward name="index" path="/index.jsp" />
+		<forward name="redirectForward"
+			path="/jsp/struts-el/logic-redirect.jsp?redirectType=forward&amp;param1=index" />
+		<forward name="redirectHref"
+			path="/jsp/struts-el/logic-redirect.jsp?redirectType=href&amp;param1=/hdiv-web-struts-1.3.8/index.jsp" />
+		<forward name="redirectPage"
+			path="/jsp/struts-el/logic-redirect.jsp?redirectType=page&amp;param1=/index.jsp" />
+	</global-forwards>
+
+	<action-mappings>
+
+		<!--  BEAN Tag actions -->
+		<action path="/bean-include"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-include.jsp" />
+		</action>
+		
+		<action path="/bean-resource"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-resource.jsp" />
+		</action>
+		
+		<action path="/bean-size"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-size.jsp" />
+		</action>						
+
+		<!-- HTML Tag actions -->
+		<action path="/html-link"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-link.jsp" />
+		</action>
+
+		<action path="/html-multibox"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-multibox.jsp" />
+		</action>
+
+		<action path="/html-radio"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-radio.jsp" />
+		</action>
+
+		<action path="/html-button"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-button.jsp" />
+		</action>
+
+		<action path="/html-file"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-file.jsp" />
+		</action>
+
+		<action path="/html-frame"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-frame.jsp" />
+		</action>
+
+		<action path="/html-input"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-input.jsp" />
+		</action>
+
+		<action path="/html-select"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-select.jsp" />
+		</action>
+
+		<action path="/html-setters"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-dyna.jsp" />
+		</action>
+		
+		<action path="/logic-iterate"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-iterate.jsp" />
+		</action>	
+		
+		<action path="/logic-match"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-match.jsp" />
+		</action>
+
+		<action path="/logic-present"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-present.jsp" />
+		</action>		
+		
+		<action path="/logic-redirect"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-redirect.jsp" />
+		</action>		
+		
+		<action path="/bean-cookie"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-cookie.jsp" />
+		</action>
+		
+		<action path="/bean-define"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-define.jsp" />
+		</action>		
+		
+		<action path="/bean-header"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-header.jsp" />
+		</action>		
+		
+		<action path="/bean-parameter"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-parameter.jsp" />
+		</action>		
+		
+		<action path="/bean-write"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/bean-write.jsp" />
+		</action>		
+		
+		<action path="/logic-compare"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-compare.jsp" />
+		</action>		
+		
+		<action path="/logic-empty"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/logic-empty.jsp" />
+		</action>		
+		
+		<action path="/bean-dyna"
+			type="org.hdiv.exercise.DynaSetAction"
+			name="dynabean" scope="session" validate="false">
+			<forward name="success" path="/jsp/struts-el/bean-dyna.jsp" />
+		</action>
+		<action path="/html-indexed"
+			type="org.hdiv.exercise.HtmlSettersAction"
+			name="testbean" scope="session" validate="false">
+			<forward name="input" path="/jsp/struts-el/html-indexed.jsp" />
+		</action>
+	</action-mappings>
+
+	<message-resources key="strutsel"
+		parameter="org.hdiv.exercise.ApplicationResources"
+		null="false" />
+
+
+</struts-config>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="/WEB-INF/jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="initDatabaseDao"
+		class="org.apache.struts.webapp.examples.attacks.dao.InitDatabaseDao">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="accountDao"
+		class="org.apache.struts.webapp.examples.attacks.dao.AccountDao">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
+	<bean id="categoryDao"
+		class="org.apache.struts.webapp.examples.attacks.dao.CategoryDao">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
+	<bean id="productDao"
+		class="org.apache.struts.webapp.examples.attacks.dao.ProductDao">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
+	<bean id="orderDao" class="org.apache.struts.webapp.examples.attacks.dao.OrderDao">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+
+	<bean id="attacksExample"
+		class="org.apache.struts.webapp.examples.attacks.logic.AttacksImpl">
+		<property name="accountDao" ref="accountDao" />
+		<property name="categoryDao" ref="categoryDao" />
+		<property name="productDao" ref="productDao" />
+		<property name="orderDao" ref="orderDao" />
+	</bean>
+
+</beans>
