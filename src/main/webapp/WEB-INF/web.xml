@@ -7,7 +7,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/hdiv-config.xml,/WEB-INF/vulnerable-config.xml</param-value>
+		<param-value>/WEB-INF/hdiv-config.xml,/WEB-INF/attacks/spring-config.xml</param-value>
 	</context-param>
 
 	<!-- Filters: HDIV Validator Filter -->
