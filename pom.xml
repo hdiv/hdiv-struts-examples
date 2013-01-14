@@ -73,7 +73,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hdiv</groupId>
-			<artifactId>hdiv-struts-1.3.8</artifactId>
+			<artifactId>hdiv-struts-1</artifactId>
 			<version>${org.hdiv.version}</version>
 		</dependency>
 		<dependency>
