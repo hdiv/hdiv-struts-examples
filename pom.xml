@@ -11,7 +11,7 @@
 
 	<properties>
 		<org.hdiv.version>2.1.4-SNAPSHOT</org.hdiv.version>
-		<org.spring.version>2.0.8</org.spring.version>
+		<org.spring.version>3.0.0.RELEASE</org.spring.version>
 		<org.struts.version>1.3.8</org.struts.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -97,6 +97,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.spring.version}</version>
+		</dependency>
+		<!-- aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
