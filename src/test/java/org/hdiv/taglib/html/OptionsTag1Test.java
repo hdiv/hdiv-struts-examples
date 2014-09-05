@@ -69,7 +69,7 @@ public class OptionsTag1Test extends JspTestCase {
 
 		super.setUp();
 		this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer();
-		this.dataComposer.beginRequest("/testFormTag.do");
+		this.dataComposer.beginRequest("POST", "/testFormTag.do");
 	}
 
 	private void runTest(String whichTest, String locale) throws Exception {
