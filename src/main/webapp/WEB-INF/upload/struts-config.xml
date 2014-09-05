@@ -19,4 +19,13 @@
          don't specify this here, it defaults to -1. -->
   <controller maxFileSize="2M" inputForward="true" multipartClass="org.hdiv.upload.HDIVMultipartRequestHandler" />
   <message-resources parameter="org.apache.struts.webapp.upload.UploadResources"/>
+  
+  <!-- ============================================ Plug Ins Configuration  -->
+  <!-- 
+       Add multiple validator resource files by setting the pathnames property 
+       with a comma delimitted list of resource files to load. 
+    -->
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/upload/validation.xml" />
+  </plug-in>
 </struts-config>
