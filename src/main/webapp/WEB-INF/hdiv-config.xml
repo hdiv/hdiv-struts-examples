@@ -5,7 +5,7 @@
 http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
 
 	<hdiv:config excludedExtensions="css,png"
-		protectedExtensions=".*.do">
+		protectedExtensions=".*.do" maxPagesPerSession="20">
 		<hdiv:sessionExpired homePage="/"/>
 		
 		<hdiv:startPages>/welcome.do</hdiv:startPages>
@@ -25,14 +25,5 @@ http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
 	<hdiv:editableValidations>
 		<hdiv:validationRule url="/attacks/secure/.*"/>
 	</hdiv:editableValidations>
-
-	<bean id="multipartConfig" class="org.hdiv.config.multipart.StrutsMultipartConfig">
-    	<property name="maxFileSize">
-    		<value>250M</value>
-    	</property>
-    	<property name="memFileSize">
-    		<value>250K</value>
-    	</property>
-    </bean> 
 
 </beans>

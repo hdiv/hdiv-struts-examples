@@ -99,5 +99,7 @@
       <forward name="success" path="/welcome.do" />
     </action>
   </action-mappings>
+  
+  <controller processorClass="org.hdiv.action.HDIVRequestProcessor" />
   <message-resources parameter="org.apache.struts.webapp.exercise.MessageResources" null="false" />
 </struts-config>
