@@ -196,7 +196,7 @@ if (expected == null) {
 if (compareTo == null) {
   compareTo = "";
 }
-
+/*
 StringBuffer sb = new StringBuffer();
 for (int i = 0; i < expected.length(); i++) {
   char ch = expected.charAt(i);
@@ -218,6 +218,10 @@ for (int i = 0; i < compareTo.length(); i++) {
   }
 }
 compareTo = sb.toString();
+*/
+
+expected = expected.replaceAll("\\s+","");
+compareTo = compareTo.replaceAll("\\s+","");
 
 Assert.assertEquals(expected, compareTo);
 %>

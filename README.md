@@ -13,3 +13,14 @@ Clone this repo and build war file (you'll need Git and Maven installed):
     mvn tomcat:run
 
 Open [http://localhost:8080/hdiv-struts-examples](http://localhost:8080/hdiv-struts-examples) in your favorite browser.
+
+Execute tests
+============================
+Follow these steps:
+
+    mvn clean package
+    mvn tomcat:run-war -P test
+    
+Open other terminal on the same folder and execute:
+
+    mvn integration-test

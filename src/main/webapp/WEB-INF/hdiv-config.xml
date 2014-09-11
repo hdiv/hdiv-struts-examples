@@ -5,13 +5,14 @@
 http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
 
 	<hdiv:config excludedExtensions="css,png"
-		protectedExtensions=".*.do" maxPagesPerSession="20">
+		protectedExtensions=".*.do" maxPagesPerSession="20" confidentiality="true">
 		<hdiv:sessionExpired homePage="/"/>
 		
 		<hdiv:startPages>/welcome.do</hdiv:startPages>
 		<hdiv:startPages>/attacks/unsecure/.*</hdiv:startPages>
 		
 		<!-- test -->
+		<hdiv:startPages>/JspRedirector</hdiv:startPages>
 		<hdiv:startPages>/test/.*</hdiv:startPages>
 		<hdiv:startPages>/testFormTag.do</hdiv:startPages>
 		<hdiv:startPages>/simpleAction.do</hdiv:startPages>

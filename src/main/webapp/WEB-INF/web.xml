@@ -25,6 +25,11 @@
 		<filter-name>ValidatorFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>ValidatorFilter</filter-name>
+		<url-pattern>/JspRedirector</url-pattern>
+	</filter-mapping>
 
 	<!-- Listeners: Spring and HDIV Listeners -->
 	<listener>
