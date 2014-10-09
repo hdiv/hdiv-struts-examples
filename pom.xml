@@ -10,7 +10,7 @@
 	<url>http://www.hdiv.org</url>
 
 	<properties>
-		<org.hdiv.version>2.1.8-SNAPSHOT</org.hdiv.version>
+		<org.hdiv.version>2.1.8</org.hdiv.version>
 		<org.spring.version>3.0.0.RELEASE</org.spring.version>
 		<org.struts.version>1.3.8</org.struts.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
