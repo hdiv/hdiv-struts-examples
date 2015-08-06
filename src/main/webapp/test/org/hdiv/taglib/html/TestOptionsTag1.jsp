@@ -183,42 +183,11 @@ String compareTo = "";
 if (pageContext.getAttribute("EXPECTED_RESULTS") == null){
     throw new javax.servlet.jsp.JspException("No tests on this page were called.  Please verify that you've setup the tests correctly.");
 }else{
-	expected=pageContext.getAttribute("TEST_RESULTS").toString();
+	expected=pageContext.getAttribute("EXPECTED_RESULTS").toString();
 }
 if (pageContext.getAttribute("TEST_RESULTS") != null){
-	compareTo=pageContext.getAttribute("EXPECTED_RESULTS").toString();
+	compareTo=pageContext.getAttribute("TEST_RESULTS").toString();
 }
-
-// Swallow tabs, carriage returns, and newlines before comparing
-if (expected == null) {
-  expected = "";
-}
-if (compareTo == null) {
-  compareTo = "";
-}
-/*
-StringBuffer sb = new StringBuffer();
-for (int i = 0; i < expected.length(); i++) {
-  char ch = expected.charAt(i);
-  if ((ch == '\t') || (ch == '\r') || (ch == '\n')) {
-    ;
-  } else {
-    sb.append(ch);
-  }
-}
-expected = sb.toString();
-
-sb = new StringBuffer();
-for (int i = 0; i < compareTo.length(); i++) {
-  char ch = compareTo.charAt(i);
-  if ((ch == '\t') || (ch == '\r') || (ch == '\n')) {
-    ;
-  } else {
-    sb.append(ch);
-  }
-}
-compareTo = sb.toString();
-*/
 
 expected = expected.replaceAll("\\s+","");
 compareTo = compareTo.replaceAll("\\s+","");

@@ -281,14 +281,9 @@
     </bean:define>
 </logic:equal>
 
-
-
-
-
 <% 
 String expected  = (String) pageContext.getAttribute("EXPECTED_RESULTS");
 String compareTo = (String) pageContext.getAttribute("TEST_RESULTS");
-
 
 if ((expected == null) || (compareTo == null)){
     Assert.fail("An invalid (or mispelled) test on this page was called.  Please verify that you've setup the tests (and spellings) correctly.");

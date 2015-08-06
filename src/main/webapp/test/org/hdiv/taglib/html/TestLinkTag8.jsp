@@ -281,10 +281,6 @@
     </bean:define>
 </logic:equal>
 
-
-
-
-
 <% 
 String expected  = (String) pageContext.getAttribute("EXPECTED_RESULTS");
 String compareTo = (String) pageContext.getAttribute("TEST_RESULTS");

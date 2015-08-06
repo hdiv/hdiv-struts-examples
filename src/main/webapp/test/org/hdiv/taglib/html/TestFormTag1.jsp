@@ -221,10 +221,6 @@
 String expected  = (String) pageContext.getAttribute("EXPECTED_RESULTS");
 String compareTo = (String) pageContext.getAttribute("TEST_RESULTS");
 
-
-System.out.println("expected:"+expected);
-System.out.println("compareTo:"+compareTo);
-
 if ((expected == null) || (expected == null)){
     Assert.fail("An invalid (or mispelled) test on this page was called.  Please verify that you've setup the tests (and spellings) correctly.");
 }

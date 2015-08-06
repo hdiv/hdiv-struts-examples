@@ -283,10 +283,10 @@ String compareTo = "";
 if (pageContext.getAttribute("EXPECTED_RESULTS") == null){
     throw new javax.servlet.jsp.JspException("No tests on this page were called.  Please verify that you've setup the tests correctly.");
 }else{
-	expected=pageContext.getAttribute("TEST_RESULTS").toString();
+	expected=pageContext.getAttribute("EXPECTED_RESULTS").toString();
 }
 if (pageContext.getAttribute("TEST_RESULTS") != null){
-	compareTo=pageContext.getAttribute("EXPECTED_RESULTS").toString();
+	compareTo=pageContext.getAttribute("TEST_RESULTS").toString();
 }
 
 Assert.assertEquals(expected, compareTo);
