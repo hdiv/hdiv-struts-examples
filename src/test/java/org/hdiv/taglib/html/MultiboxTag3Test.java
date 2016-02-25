@@ -85,7 +85,7 @@ public class MultiboxTag3Test extends JspTestCase {
 	protected void setUp() throws Exception {
 
 		super.setUp();
-		this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer();
+		this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer(request);
 		this.dataComposer.beginRequest("POST", "/testFormTag.do");
 	}
 
