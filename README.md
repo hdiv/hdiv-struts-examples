@@ -1,5 +1,5 @@
-Http Data Integrity Validator
-=============================
+Hdiv: Application Self-Protection
+=================================
 Sample application showing the integration between Struts 1 and Hdiv.
 Supported Struts version is 1.3.8.
 
