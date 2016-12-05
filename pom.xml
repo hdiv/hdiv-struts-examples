@@ -5,9 +5,9 @@
 	<groupId>org.hdiv</groupId>
 	<artifactId>hdiv-struts-examples</artifactId>
 	<packaging>war</packaging>
-	<name>HDIV Struts 1 WebApp</name>
+	<name>Hdiv Struts 1 WebApp</name>
 	<version>1.0</version>
-	<url>http://www.hdiv.org</url>
+	<url>https://www.hdivsecurity.com</url>
 
 	<properties>
 		<org.hdiv.version>3.2.0</org.hdiv.version>
