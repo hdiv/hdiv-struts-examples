@@ -18,8 +18,6 @@ package org.hdiv.taglib.html;
 import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.apache.cactus.JspTestCase;
 import org.apache.struts.Globals;
@@ -27,103 +25,104 @@ import org.apache.struts.taglib.html.Constants;
 import org.hdiv.dataComposer.IDataComposer;
 import org.hdiv.taglib.SimpleBeanForTesting;
 import org.hdiv.util.HDIVUtil;
+import org.hdiv.util.Method;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * Suite of unit tests for the
- * <code>org.apache.struts.taglib.html.MultiboxTag</code> class.
- *  NOTE - These tests were separated into 4 files each because of the
- *         size of the jsp. (not playing well with Tomcat 3.3
+ * Suite of unit tests for the <code>org.apache.struts.taglib.html.MultiboxTag</code> class. NOTE - These tests were separated into 4 files
+ * each because of the size of the jsp. (not playing well with Tomcat 3.3
  *
- *  These tests are numbered as such:
+ * These tests are numbered as such:
  *
- *  1 thru 4 test a single checkbox
- *  TestMultiboxTag1 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag2 - Same as 1, but using BodyContent instead of value attribute
+ * 1 thru 4 test a single checkbox TestMultiboxTag1 - These test validate true (a value was in the array) on our form. TestMultiboxTag2 -
+ * Same as 1, but using BodyContent instead of value attribute
  *
- *  TestMultiboxTag3 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag4 - Same as 3, but using BodyContent instead of value attribute
+ * TestMultiboxTag3 - These test validate true (a value was in the array) on our form. TestMultiboxTag4 - Same as 3, but using BodyContent
+ * instead of value attribute
  * 
- *  5 thru 8 test multiple checkboxes
- *  TestMultiboxTag5 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag6 - Same as 5, but using BodyContent instead of value attribute
+ * 5 thru 8 test multiple checkboxes TestMultiboxTag5 - These test validate true (a value was in the array) on our form. TestMultiboxTag6 -
+ * Same as 5, but using BodyContent instead of value attribute
  *
- *  TestMultiboxTag7 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag8 - Same as 7, but using BodyContent instead of value attribute
+ * TestMultiboxTag7 - These test validate true (a value was in the array) on our form. TestMultiboxTag8 - Same as 7, but using BodyContent
+ * instead of value attribute
  */
 public class MultiboxTag1Test extends JspTestCase {
 
-	private IDataComposer dataComposer;	
-	
-    /**
-     * Defines the testcase name for JUnit.
-     *
-     * @param theName the testcase's name.
-     */
-    public MultiboxTag1Test(String theName) {
-        super(theName);
-    }
+	private IDataComposer dataComposer;
 
-    /**
-     * Start the tests.
-     *
-     * @param theArgs the arguments. Not used
-     */
-    public static void main(String[] theArgs) {
-        junit.awtui.TestRunner.main(new String[] {MultiboxTag1Test.class.getName()});
-    }
+	/**
+	 * Defines the testcase name for JUnit.
+	 *
+	 * @param theName the testcase's name.
+	 */
+	public MultiboxTag1Test(final String theName) {
+		super(theName);
+	}
 
-    /**
-     * @return a test suite (<code>TestSuite</code>) that includes all methods
-     *         starting with "test"
-     */
-    public static Test suite() {
-        // All methods starting with "test" will be executed in the test suite.
-        return new TestSuite(MultiboxTag1Test.class);
-    }
-    
-    protected void setUp() throws Exception {
-        
-    	super.setUp();
-    	this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer(request);
-		this.dataComposer.beginRequest("POST", "/testFormTag.do");
-    }    
+	/**
+	 * Start the tests.
+	 *
+	 * @param theArgs the arguments. Not used
+	 */
+	public static void main(final String[] theArgs) {
+		junit.awtui.TestRunner.main(new String[] { MultiboxTag1Test.class.getName() });
+	}
 
-    private void runMyTest(String whichTest, String locale){
-    	
-    	pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);
+	/**
+	 * @return a test suite (<code>TestSuite</code>) that includes all methods starting with "test"
+	 */
+	public static Test suite() {
+		// All methods starting with "test" will be executed in the test suite.
+		return new TestSuite(MultiboxTag1Test.class);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+
+		super.setUp();
+		dataComposer = HDIVUtil.getDataComposer(request);
+		dataComposer.beginRequest(Method.POST, "/testFormTag.do");
+	}
+
+	private void runMyTest(final String whichTest, final String locale) {
+
+		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);
 
 		String[] s = new String[7];
-		for(int i = 1; i < 7; i++){
+		for (int i = 1; i < 7; i++) {
 			s[i] = "value" + i;
 		}
 		SimpleBeanForTesting sbft = new SimpleBeanForTesting(s);
 
-    	pageContext.setAttribute(Constants.BEAN_KEY, sbft, PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, sbft, PageContext.REQUEST_SCOPE);
 		request.setAttribute("runTest", whichTest);
-        try {
+		try {
 			pageContext.forward("/test/org/hdiv/taglib/html/TestMultiboxTag1.jsp");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			fail("There is a problem that is preventing the tests to continue!");
 		}
-    }
+	}
 
-    /*
-     * Testing MultiboxTag.
-     */
-    public void testMultiboxPropertyTrue(){
-    	runMyTest("testMultiboxPropertyTrue", "");
+	/*
+	 * Testing MultiboxTag.
+	 */
+	public void testMultiboxPropertyTrue() {
+		runMyTest("testMultiboxPropertyTrue", "");
 	}
-    
-    public void testMultiboxPropertyTrueAccesskey(){
-    	runMyTest("testMultiboxPropertyTrueAccesskey", "");
+
+	public void testMultiboxPropertyTrueAccesskey() {
+		runMyTest("testMultiboxPropertyTrueAccesskey", "");
 	}
-    
-    public void testMultiboxPropertyTrueAlt(){
-    	runMyTest("testMultiboxPropertyTrueAlt", "");
+
+	public void testMultiboxPropertyTrueAlt() {
+		runMyTest("testMultiboxPropertyTrueAlt", "");
 	}
-    
-    public void testMultiboxPropertyTrueAltKey1() {
+
+	public void testMultiboxPropertyTrueAltKey1() {
 		runMyTest("testMultiboxPropertyTrueAltKey1", "");
 	}
 
@@ -131,10 +130,10 @@ public class MultiboxTag1Test extends JspTestCase {
 		runMyTest("testMultiboxPropertyTrueAltKey2", "");
 	}
 
-    public void testMultiboxPropertyTrueAltKey3() throws Exception {
-        runMyTest("testMultiboxPropertyTrueAltKey3", "");
-    }	
-	
+	public void testMultiboxPropertyTrueAltKey3() throws Exception {
+		runMyTest("testMultiboxPropertyTrueAltKey3", "");
+	}
+
 	public void testMultiboxPropertyTrueAltKey_fr1() {
 		runMyTest("testMultiboxPropertyTrueAltKey1_fr", "fr");
 	}

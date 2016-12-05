@@ -19,77 +19,77 @@ import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.apache.cactus.JspTestCase;
 import org.apache.struts.Globals;
 import org.apache.struts.taglib.html.Constants;
 import org.hdiv.dataComposer.IDataComposer;
 import org.hdiv.taglib.SimpleBeanForTesting;
 import org.hdiv.util.HDIVUtil;
+import org.hdiv.util.Method;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * Suite of unit tests for the <code>org.hdiv.taglib.html.HiddenTagHDIV</code>
- * class.
+ * Suite of unit tests for the <code>org.hdiv.taglib.html.HiddenTagHDIV</code> class.
  */
 public class HiddenTag1Test extends JspTestCase {
-	
+
 	private IDataComposer dataComposer;
-	
-    /**
-     * Defines the testcase name for JUnit.
-     *
-     * @param theName the testcase's name.
-     */
-    public HiddenTag1Test(String theName) {
-        super(theName);
-    }
-    
-    /**
-     * Start the tests.
-     *
-     * @param theArgs the arguments. Not used
-     */
-    public static void main(String[] theArgs) {
-        junit.awtui.TestRunner.main(new String[] {HiddenTag1Test.class.getName()});
-    }
 
-    /**
-     * @return a test suite (<code>TestSuite</code>) that includes all methods
-     *         starting with "test"
-     */
-    public static Test suite() {
-        // All methods starting with "test" will be executed in the test suite.
-        return new TestSuite(HiddenTag1Test.class);
-    }
+	/**
+	 * Defines the testcase name for JUnit.
+	 *
+	 * @param theName the testcase's name.
+	 */
+	public HiddenTag1Test(final String theName) {
+		super(theName);
+	}
 
-    protected void setUp() throws Exception {
-    
-    	super.setUp();
-    	this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer(request);    	
-		this.dataComposer.beginRequest("POST", "/testFormTag.do");
-    }
-    
-    private void runMyTest(String whichTest, String locale) {
-    	
-    	pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);        	
-    	pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("Test Value"), PageContext.REQUEST_SCOPE);    	
-    	
+	/**
+	 * Start the tests.
+	 *
+	 * @param theArgs the arguments. Not used
+	 */
+	public static void main(final String[] theArgs) {
+		junit.awtui.TestRunner.main(new String[] { HiddenTag1Test.class.getName() });
+	}
+
+	/**
+	 * @return a test suite (<code>TestSuite</code>) that includes all methods starting with "test"
+	 */
+	public static Test suite() {
+		// All methods starting with "test" will be executed in the test suite.
+		return new TestSuite(HiddenTag1Test.class);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+
+		super.setUp();
+		dataComposer = HDIVUtil.getDataComposer(request);
+		dataComposer.beginRequest(Method.POST, "/testFormTag.do");
+	}
+
+	private void runMyTest(final String whichTest, final String locale) {
+
+		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("Test Value"), PageContext.REQUEST_SCOPE);
+
 		request.setAttribute("runTest", whichTest);
-        try {
+		try {
 			pageContext.forward("/test/org/hdiv/taglib/html/TestHiddenTag1.jsp");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			fail("There is a problem that is preventing the tests to continue!");
 		}
-    }
-    
-    /*
-     * Testing HiddenTagHDIV.
-     */
-    public void testHiddenProperty() {
+	}
+
+	/*
+	 * Testing HiddenTagHDIV.
+	 */
+	public void testHiddenProperty() {
 		runMyTest("testHiddenProperty", "");
 	}
 
@@ -108,10 +108,10 @@ public class HiddenTag1Test extends JspTestCase {
 	public void testHiddenPropertyAltKey2() {
 		runMyTest("testHiddenPropertyAltKey2", "");
 	}
-	
-    public void testHiddenPropertyAltKey3() throws Exception {
-        runMyTest("testHiddenPropertyAltKey3", "");
-    }	
+
+	public void testHiddenPropertyAltKey3() throws Exception {
+		runMyTest("testHiddenPropertyAltKey3", "");
+	}
 
 	public void testHiddenPropertyAltKey_fr1() {
 		runMyTest("testHiddenPropertyAltKey1_fr", "fr");

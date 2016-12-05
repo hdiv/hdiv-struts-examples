@@ -18,8 +18,6 @@ package org.hdiv.taglib.html;
 import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.apache.cactus.JspTestCase;
 import org.apache.struts.Globals;
@@ -27,40 +25,39 @@ import org.apache.struts.taglib.html.Constants;
 import org.hdiv.dataComposer.IDataComposer;
 import org.hdiv.taglib.SimpleBeanForTesting;
 import org.hdiv.util.HDIVUtil;
+import org.hdiv.util.Method;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * Suite of unit tests for the
- * <code>org.apache.struts.taglib.html.MultiboxTag</code> class.
- *  NOTE - These tests were separated into 4 files each because of the
- *         size of the jsp. (not playing well with Tomcat 3.3
+ * Suite of unit tests for the <code>org.apache.struts.taglib.html.MultiboxTag</code> class. NOTE - These tests were separated into 4 files
+ * each because of the size of the jsp. (not playing well with Tomcat 3.3
  *
- *  These tests are numbered as such:
+ * These tests are numbered as such:
  *
- *  1 thru 4 test a single checkbox
- *  TestMultiboxTag1 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag2 - Same as 1, but using BodyContent instead of value attribute
+ * 1 thru 4 test a single checkbox TestMultiboxTag1 - These test validate true (a value was in the array) on our form. TestMultiboxTag2 -
+ * Same as 1, but using BodyContent instead of value attribute
  *
- *  TestMultiboxTag3 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag4 - Same as 3, but using BodyContent instead of value attribute
+ * TestMultiboxTag3 - These test validate true (a value was in the array) on our form. TestMultiboxTag4 - Same as 3, but using BodyContent
+ * instead of value attribute
  * 
- *  5 thru 8 test multiple checkboxes
- *  TestMultiboxTag5 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag6 - Same as 5, but using BodyContent instead of value attribute
+ * 5 thru 8 test multiple checkboxes TestMultiboxTag5 - These test validate true (a value was in the array) on our form. TestMultiboxTag6 -
+ * Same as 5, but using BodyContent instead of value attribute
  *
- *  TestMultiboxTag7 - These test validate true (a value was in the array) on our form.
- *  TestMultiboxTag8 - Same as 7, but using BodyContent instead of value attribute
+ * TestMultiboxTag7 - These test validate true (a value was in the array) on our form. TestMultiboxTag8 - Same as 7, but using BodyContent
+ * instead of value attribute
  */
 public class MultiboxTag3Test extends JspTestCase {
 
 	private IDataComposer dataComposer;
-
 
 	/**
 	 * Defines the testcase name for JUnit.
 	 *
 	 * @param theName the testcase's name.
 	 */
-	public MultiboxTag3Test(String theName) {
+	public MultiboxTag3Test(final String theName) {
 		super(theName);
 	}
 
@@ -69,30 +66,29 @@ public class MultiboxTag3Test extends JspTestCase {
 	 *
 	 * @param theArgs the arguments. Not used
 	 */
-	public static void main(String[] theArgs) {
+	public static void main(final String[] theArgs) {
 		junit.awtui.TestRunner.main(new String[] { MultiboxTag3Test.class.getName() });
 	}
 
 	/**
-	 * @return a test suite (<code>TestSuite</code>) that includes all methods
-	 *         starting with "test"
+	 * @return a test suite (<code>TestSuite</code>) that includes all methods starting with "test"
 	 */
 	public static Test suite() {
 		// All methods starting with "test" will be executed in the test suite.
 		return new TestSuite(MultiboxTag3Test.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 
 		super.setUp();
-		this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer(request);
-		this.dataComposer.beginRequest("POST", "/testFormTag.do");
+		dataComposer = HDIVUtil.getDataComposer(request);
+		dataComposer.beginRequest(Method.POST, "/testFormTag.do");
 	}
 
-	private void runMyTest(String whichTest, String locale) {
+	private void runMyTest(final String whichTest, final String locale) {
 
-		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale),
-									PageContext.SESSION_SCOPE);
+		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);
 
 		String[] s = new String[7];
 		for (int i = 1; i < 7; i++) {
@@ -104,7 +100,8 @@ public class MultiboxTag3Test extends JspTestCase {
 		request.setAttribute("runTest", whichTest);
 		try {
 			pageContext.forward("/test/org/hdiv/taglib/html/TestMultiboxTag3.jsp");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			fail("There is a problem that is preventing the tests to continue!");
 		}

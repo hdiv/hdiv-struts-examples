@@ -19,32 +19,31 @@ import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.apache.cactus.JspTestCase;
 import org.apache.struts.Globals;
+import org.apache.struts.taglib.html.Constants;
+import org.apache.struts.util.LabelValueBean;
 import org.hdiv.dataComposer.IDataComposer;
 import org.hdiv.taglib.SimpleBeanForTesting;
 import org.hdiv.util.HDIVUtil;
-import org.apache.struts.taglib.html.Constants;
-import org.apache.struts.util.LabelValueBean;
+import org.hdiv.util.Method;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * Suite of unit tests for the <code>org.hdiv.taglib.html.OptionsTagHDIV</code>
- * class.
+ * Suite of unit tests for the <code>org.hdiv.taglib.html.OptionsTagHDIV</code> class.
  */
 public class OptionsTag1Test extends JspTestCase {
 
 	private IDataComposer dataComposer;
-
 
 	/**
 	 * Defines the testcase name for JUnit.
 	 * 
 	 * @param theName the testcase's name.
 	 */
-	public OptionsTag1Test(String theName) {
+	public OptionsTag1Test(final String theName) {
 		super(theName);
 	}
 
@@ -53,28 +52,27 @@ public class OptionsTag1Test extends JspTestCase {
 	 * 
 	 * @param theArgs the arguments. Not used
 	 */
-	public static void main(String[] theArgs) {
+	public static void main(final String[] theArgs) {
 		junit.awtui.TestRunner.main(new String[] { OptionsTag1Test.class.getName() });
 	}
 
 	/**
-	 * @return a test suite (<code>TestSuite</code>) that includes all methods
-	 *         starting with "test"
+	 * @return a test suite (<code>TestSuite</code>) that includes all methods starting with "test"
 	 */
 	public static Test suite() {
 		return new TestSuite(OptionsTag1Test.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 
 		super.setUp();
-		this.dataComposer = (IDataComposer) HDIVUtil.getDataComposer(request);
-		this.dataComposer.beginRequest("POST", "/testFormTag.do");
+		dataComposer = HDIVUtil.getDataComposer(request);
+		dataComposer.beginRequest(Method.POST, "/testFormTag.do");
 	}
 
-	private void runTest(String whichTest, String locale) throws Exception {
-		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale),
-									PageContext.SESSION_SCOPE);
+	private void runTest(final String whichTest, final String locale) throws Exception {
+		pageContext.setAttribute(Globals.LOCALE_KEY, new Locale(locale, locale), PageContext.SESSION_SCOPE);
 
 		pageContext.setAttribute("runTest", whichTest, PageContext.REQUEST_SCOPE);
 		pageContext.forward("/test/org/hdiv/taglib/html/TestOptionsTag1.jsp");
@@ -98,45 +96,37 @@ public class OptionsTag1Test extends JspTestCase {
 
 	public void testOptionsCollectionArrayItemValueInCollectionProperty() throws Exception {
 		pageContext.setAttribute("arrayOfLVB", createArrayOfLVB(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key1"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key1"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsCollectionArrayItemValueInCollectionProperty", "");
 	}
 
 	public void testOptionsCollectionArrayItemValueNotInCollectionProperty() throws Exception {
 		pageContext.setAttribute("arrayOfLVB", createArrayOfLVB(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key15"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key15"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsCollectionArrayItemValueNotInCollectionProperty", "");
 	}
 
-	public void testOptionsCollectionArrayItemValueInCollectionPropertyLabelProperty()
-			throws Exception {
+	public void testOptionsCollectionArrayItemValueInCollectionPropertyLabelProperty() throws Exception {
 		pageContext.setAttribute("arrayOfLVB", createArrayOfLVB(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key1"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key1"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsCollectionArrayItemValueInCollectionPropertyLabelProperty", "");
 	}
 
-	public void testOptionsCollectionArrayItemValueNotInCollectionPropertyLabelProperty()
-			throws Exception {
+	public void testOptionsCollectionArrayItemValueNotInCollectionPropertyLabelProperty() throws Exception {
 		pageContext.setAttribute("arrayOfLVB", createArrayOfLVB(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key15"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("key15"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsCollectionArrayItemValueNotInCollectionPropertyLabelProperty", "");
 	}
 
 	public void testOptionsNameArrayItemValueInCollection() throws Exception {
 		pageContext.setAttribute("stringValues", createArrayofStrings(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val1"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val1"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsNameArrayItemValueInCollection", "");
 	}
 
 	public void testOptionsNameArrayItemValueNotInCollection() throws Exception {
 		pageContext.setAttribute("stringValues", createArrayofStrings(), PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val15"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val15"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsNameArrayItemValueNotInCollection", "");
 	}
 
@@ -155,18 +145,14 @@ public class OptionsTag1Test extends JspTestCase {
 	}
 
 	public void testOptionsNamePropertyArrayItemValueInCollection() throws Exception {
-		pageContext.setAttribute("stringValues", new SimpleBeanForTesting(createArrayofStrings()),
-									PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val1"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute("stringValues", new SimpleBeanForTesting(createArrayofStrings()), PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val1"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsNamePropertyArrayItemValueInCollection", "");
 	}
 
 	public void testOptionsNamePropertyArrayItemValueNotInCollection() throws Exception {
-		pageContext.setAttribute("stringValues", new SimpleBeanForTesting(createArrayofStrings()),
-									PageContext.REQUEST_SCOPE);
-		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val15"),
-									PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute("stringValues", new SimpleBeanForTesting(createArrayofStrings()), PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(Constants.BEAN_KEY, new SimpleBeanForTesting("val15"), PageContext.REQUEST_SCOPE);
 		runTest("testOptionsNamePropertyArrayItemValueNotInCollection", "");
 	}
 }
