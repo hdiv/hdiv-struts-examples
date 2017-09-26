@@ -222,5 +222,8 @@ if (pageContext.getAttribute("TEST_RESULTS") != null){
 	compareTo=pageContext.getAttribute("TEST_RESULTS").toString();
 }
 
+System.out.println("expected: "+expected);
+System.out.println("compareTo: "+compareTo);
+
 Assert.assertEquals(expected, compareTo);
 %>

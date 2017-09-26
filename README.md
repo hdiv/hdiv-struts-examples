@@ -18,8 +18,7 @@ Execute tests
 ============================
 Follow these steps:
 
-    mvn clean package
-    mvn tomcat:run-war -P test
+    mvn tomcat7:run-war -P test
     
 Open other terminal on the same folder and execute:
 
