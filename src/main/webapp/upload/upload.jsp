@@ -52,5 +52,17 @@
     <html:submit>Submit For Bug 38534</html:submit>
     </p>
     </html:form>
+    <hr/>
+    <form action="upload-commons-submit.do?queryParam=Successful" enctype="multipart/form-data" method="post">
+    <p>This form is to test direct commons-fileupload integration.
+    </p>
+    <p>
+        <input type="file" name="theFile" />
+        <input type="hidden" name="theText" value="ABCDEF"/>
+    </p>
+    <p>
+    <input type="submit" value="Submit"/>
+    </p>
+    </form>
   </body>
 </html>

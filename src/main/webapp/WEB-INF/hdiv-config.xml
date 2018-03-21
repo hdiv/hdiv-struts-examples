@@ -11,6 +11,9 @@ http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
 		<hdiv:startPages>/welcome.do</hdiv:startPages>
 		<hdiv:startPages>/attacks/unsecure/.*</hdiv:startPages>
 		
+		<!-- Multipart direct commons-fileupload usage example -->
+		<hdiv:startPages method="POST">/upload/upload-commons-submit.do</hdiv:startPages>
+		
 		<!-- test -->
 		<hdiv:startPages>/JspRedirector</hdiv:startPages>
 		<hdiv:startPages>/test/.*</hdiv:startPages>

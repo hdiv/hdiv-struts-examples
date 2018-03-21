@@ -13,11 +13,16 @@
       <forward name="input" path="/upload.jsp" />
       <forward name="display" path="/display.jsp" />
     </action>
+    <action path="/upload-commons-submit" type="org.apache.struts.webapp.upload.CommonsFileuploadAction">
+      <forward name="input" path="/upload.jsp" />
+      <forward name="display" path="/display.jsp" />
+    </action>
   </action-mappings>
   <!-- This is where you set the maximum file size for your file uploads.
          -1 is an unlimited size. If you
          don't specify this here, it defaults to -1. -->
   <controller maxFileSize="2M" inputForward="true" multipartClass="org.hdiv.upload.HDIVMultipartRequestHandler" />
+   
   <message-resources parameter="org.apache.struts.webapp.upload.UploadResources"/>
   
   <!-- ============================================ Plug Ins Configuration  -->
