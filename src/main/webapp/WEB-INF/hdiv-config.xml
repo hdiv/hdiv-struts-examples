@@ -5,7 +5,8 @@
 http://www.hdiv.org/schema/hdiv http://www.hdiv.org/schema/hdiv/hdiv.xsd">
 
 	<hdiv:config excludedExtensions="css,png"
-		protectedExtensions=".*.do" maxPagesPerSession="20" confidentiality="true">
+		protectedExtensions=".*.do" maxPagesPerSession="20" confidentiality="true"
+		multipartIntegration="false">
 		<hdiv:sessionExpired homePage="/"/>
 		
 		<hdiv:startPages>/welcome.do</hdiv:startPages>
