@@ -10,7 +10,7 @@
 	<url>https://www.hdivsecurity.com</url>
 
 	<properties>
-		<org.hdiv.version>3.3.0</org.hdiv.version>
+		<org.hdiv.version>3.4.0</org.hdiv.version>
 		<org.spring.version>3.2.13.RELEASE</org.spring.version>
 		<org.struts.version>1.3.8</org.struts.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
